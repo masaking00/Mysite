@@ -1,0 +1,79 @@
+{% extends "user/base.html" %}
+{% block content %}
+
+<div id="app">
+    <v-app>
+    {% if user.is_authenticated %}
+
+    <v-main>
+        <v-container>
+          {% if user.initial_setting == False %}
+          <v-row>
+            <v-col>
+              <a href="{% url 'report:initial_setting' %}">こちらから初期設定をおこなってください</a>
+            </v-clo>
+          </v-row>
+
+          {% else %}
+          <v-row>
+            <v-col>
+              {{ text }}
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col>
+              {% if flag == True %}
+                {% for i in report %}
+                  <a href="{% url 'report:report_detail' i.pk %}">{{ i.Year }} 年 {{ i.Month }} 月分 {{ i.Approval_name }}</a>              
+                {% endfor %}
+              {% else %}
+                {% for i in report %}
+                  {{ i.Year }} 年 {{ i.Month }} 月分 {{ i.Approval_name }}
+                {% endfor %}
+              {% endif %}
+            </v-clo>
+          </v-row>
+          <v-row>
+            <v-col>
+              <h3>[[ test ]]</h3>
+            </v-clo>
+          </v-row>
+          <v-row>
+            <v-col>
+          </v-row>
+          {% endif %}
+        </v-container>
+    </v-main>
+
+    {% else %}
+    <v-main>
+        <v-container>
+          <v-row>
+            <v-col>
+              右上からログインをしてください
+            </v-clo>
+          </v-row>
+        </v-container>
+    </v-main>
+    {% endif %}
+
+    </v-app>
+</div>
+
+<script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      delimiters: ["[[","]]"],
+      data:{
+          test:1265161653,
+          aaa:"",
+      },
+      methods:{
+
+      },
+    })
+  </script>
+
+{% endblock %}

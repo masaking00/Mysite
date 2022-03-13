@@ -1,0 +1,65 @@
+{% extends "user/base.html" %}
+{% block content %}
+
+<div id="app">
+    <v-app>
+        <v-main>
+            <v-container>
+              <v-row>
+                <v-col>
+                    <v-card width="800px">
+                        <v-container>
+                            <v-row>
+                              <v-col>
+                                <form action="{% url 'user:login' %}" method="POST">
+                                    <v-card-title>
+                                        ログイン
+                                    </v-card-title>
+
+                                    <v-card-text>
+                                        {{ form.non_field_errors }}
+                                        {% for field in form %}
+                                            {{ field.label }}<p></p>
+                                            {{ field }}
+                                            {{ field.errors }}
+                                            <hr><p></p>
+                                        {% endfor %}
+                                        <v-btn
+                                            type="submit"
+                                            dark
+                                            color="indigo"
+                                            elevation="4">
+                                            Login
+                                            <v-icon color="white" dark>
+                                                mdi-login-variant
+                                            </v-icon>
+                                        </v-btn>
+                                        <input type="hidden" name="next" value="{{ next }}" />
+                                        {% csrf_token %}
+                                    </v-card-text>
+                                </form>
+                            </v-clo>
+                        </v-row>
+                      </v-container>          
+                    </v-card>
+                </v-clo>
+              </v-row>
+            </v-container>
+        </v-main>
+    </v-app>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      delimiters: ["[[","]]"],
+      data:{
+          test:1265161653,
+          aaa:"",
+      }
+    })
+  </script>
+{% endblock %}
